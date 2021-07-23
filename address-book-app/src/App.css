@@ -1,0 +1,101 @@
+ul {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+#contactPreview {
+  position: relative;
+  padding-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+#contactPreview :hover {
+  cursor: pointer;
+}
+
+#contactPreview h1 {
+  font-size: 18px;
+  font-family: arial;
+  font-weight: normal;
+  margin: 0px;
+}
+
+#contactPreview header p {
+  margin: 0px;
+  font-size: 14px;
+  color: blue;
+}
+
+#contactPreview p span {
+  color: black;
+}
+
+#contactPreview img {
+  margin-right: 10px;
+}
+
+#fullContact {
+  padding-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+#fullContact img {
+  margin-right: 10px;
+}
+
+#fullContact header {
+  display: flex;
+  flex-direction: column;
+}
+
+#fullContact h1 {
+  font-size: 18px;
+  font-family: arial;
+  font-weight: normal;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+#greyText {
+  font-weight: bold;
+}
+
+#fullContact header p {
+  margin: 0px;
+  font-size: 14px;
+}
+
+#break {
+  margin-bottom: 5px;
+}
+
+#showContact {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: #ccc;
+  margin: 0;
+}
+
+#hideContact {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: #ccc;
+  margin: 0;
+  cursor: pointer;
+}
+
+
+
+
