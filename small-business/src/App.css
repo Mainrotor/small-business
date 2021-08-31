@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+}
+
+body {
+  margin: auto;
+}
+
+#loginMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+#loginMain form {
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+#listingsCont {
+  margin: auto;
+  width: 100%;
+  padding-top: 70px;
+}
+
+#listingsTable {
+  font-family: arial;
+  width: 80%;
+  margin: auto;
+  text-align: left;
+  height: auto;
+  border-collapse: collapse;
+}
+
+#listingsTable tr th {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid grey;
+  font-size: 14px;
+}
+
+#listingsTable tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid grey;
+  font-size: 14px;
+}
