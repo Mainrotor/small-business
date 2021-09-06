@@ -1,5 +1,4 @@
 export const login = (username, password) => {
-  console.log(username + password + "test");
   return {
     type: "LOGIN",
     value: {
@@ -10,5 +9,22 @@ export const login = (username, password) => {
 };
 
 export const logout = () => {
-  return { type: "LOGOUT", value: false };
+  return {
+    type: "LOGOUT",
+    value: "",
+  };
+};
+
+export const deleteListing = (index) => {
+  return {
+    type: "DELETE",
+    value: index,
+  };
+};
+
+export const create = (payload) => {
+  return {
+    type: "CREATE",
+    value: payload,
+  };
 };

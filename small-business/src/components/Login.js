@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -13,17 +13,29 @@ const useStyles = makeStyles({
   },
 });
 
-const submitHandler = (e, props) => {
-  e.preventDefault();
-  props.login("jason", "pass");
-};
-
 export default function Login(props) {
+  const [localUsername, setLocalUsername] = useState("");
+  const [localPassword, setLocalPassword] = useState("");
+
   const classes = useStyles();
 
-  useEffect(() => {
-    console.log(props.user);
-  });
+  const handleUserChange = (e) => {
+    setLocalUsername(e.target.value);
+    console.log(localUsername);
+  };
+
+  const handlePassChange = (e) => {
+    setLocalPassword(e.target.value);
+    console.log(localPassword);
+  };
+
+  const submitHandler = (e, props) => {
+    e.preventDefault();
+    props.login(localUsername, localPassword);
+    document.cookie = "loggedIn=true; max-age=60";
+    setLocalUsername("");
+    setLocalPassword("");
+  };
 
   return (
     <main id="loginMain">
@@ -39,12 +51,16 @@ export default function Login(props) {
           id="standard-basic"
           className={classes.input}
           label="Username"
+          onChange={handleUserChange}
+          value={localUsername}
         />
         <TextField
           id="standard-basic"
           className={classes.bottomInput}
           label="Password"
           type="password"
+          onChange={handlePassChange}
+          value={localPassword}
         />
         <Button variant="contained" color="default" type="submit">
           LOGIN

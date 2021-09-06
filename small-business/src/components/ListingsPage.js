@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import red from "@material-ui/core/colors/red";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Listing from "./Listing.js";
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,28 +27,57 @@ const useStyles = makeStyles((theme) => ({
 const ListingsPage = (props) => {
   const classes = useStyles();
 
-  const loggedInChecker = (props) => {
+  const loggedInChecker = (props, type, index) => {
     if (props.loggedIn) {
-      return (
-        <td>
-          <DeleteIcon className={classes.icon} />
-        </td>
-      );
+      switch (type) {
+        case "header":
+          return <TableCell>Delete</TableCell>;
+          break;
+        case "row":
+          return (
+            <TableCell>
+              <DeleteIcon
+                onClick={() => {
+                  deleteHandler(index);
+                }}
+              />
+            </TableCell>
+          );
+      }
     }
   };
 
+  const deleteHandler = (index) => {
+    props.deleteListing(index);
+  };
+
   return (
-    <div id="listingsCont">
-      <table id="listingsTable">
-        <tr class="lrow">
-          <th>Name</th>
-          <th>Description</th>
-          <th>Hours</th>
-          <th>Address</th>
-        </tr>
-      </table>
-      <Listing />
-    </div>
+    <Container maxWidth="lg" className="car-container">
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Hours</TableCell>
+            <TableCell>Address</TableCell>
+            {loggedInChecker(props, "header")}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.listings.map((listing) => (
+            <TableRow key={listing.id}>
+              <TableCell>
+                <Link to={`/listing/${listing.id}`}>{listing["name"]}</Link>
+              </TableCell>
+              <TableCell>{listing["description"]}</TableCell>
+              <TableCell>{listing["hours"]}</TableCell>
+              <TableCell>{listing["address"]}</TableCell>
+              {loggedInChecker(props, "row", listing.id)}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Container>
   );
 };
 
