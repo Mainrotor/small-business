@@ -12,6 +12,10 @@ export default {
       hours: "6AM-11PM",
       address: "121 Pickle Rd #100, Austin, TX 78704",
       id: 0,
+      coords: {
+        lat: 30.227301,
+        lng: -97.763046,
+      },
     },
     {
       name: "Patrizi's",
@@ -20,6 +24,10 @@ export default {
       hours: "5PM-9:30PM",
       address: "2307 Manor Rd, Austin, TX 78722",
       id: 1,
+      coords: {
+        lat: 30.284389,
+        lng: -97.717697,
+      },
     },
   ],
 };

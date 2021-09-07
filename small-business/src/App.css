@@ -95,3 +95,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+#mapContainer {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}

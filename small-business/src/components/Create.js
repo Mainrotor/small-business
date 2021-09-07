@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { create } from "../redux/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,9 +21,28 @@ export default function Create(props) {
     hours: "",
     description: "",
     id: "",
+    coords: {},
   });
 
+  const [coordinateState, setCoordinateState] = useState({});
+
   const classes = useStyles();
+
+  const getCoords = (address) => {
+    fetch(
+      `https://maps.google.com/maps/api/geocode/json?key=AIzaSyAtbxfNcSuqkQbvndVNIExOIgrGs3u4zcE&address=${address}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setPayload((prevState) => ({
+          ...prevState,
+          coords: {
+            lat: data.results[0].geometry.location.lat,
+            lng: data.results[0].geometry.location.lng,
+          },
+        }));
+      });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -34,15 +55,8 @@ export default function Create(props) {
     ) {
       return <h1>Fields Required</h1>;
     } else {
-      console.log(payload.name);
+      getCoords(payload.address);
       props.create(payload);
-      setPayload({
-        name: "",
-        address: "",
-        hours: "",
-        description: "",
-        id: "",
-      });
     }
   };
 
@@ -50,11 +64,23 @@ export default function Create(props) {
     let fieldName = e.target.name;
     let value = e.target.value;
 
-    setPayload((prevState) => ({
-      ...prevState,
-      [fieldName]: value,
-      id: props.listings[props.listings.length - 1].id + 1,
-    }));
+    if (props.listings.length > 0) {
+      setPayload((prevState) => ({
+        ...prevState,
+        [fieldName]: value,
+
+        id: props.listings[props.listings.length - 1].id + 1,
+      }));
+    } else {
+      setPayload((prevState) => ({
+        ...prevState,
+        [fieldName]: value,
+
+        id: 0,
+      }));
+    }
+
+    getCoords(payload.address);
   };
 
   return (

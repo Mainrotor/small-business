@@ -43,7 +43,6 @@ const listings = (state = [], action) => {
       break;
     case "CREATE":
       state = [...state, action.value];
-      console.log(state);
       return state;
     default:
       return state;
